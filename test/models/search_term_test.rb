@@ -27,8 +27,10 @@ class SearchTermTest < ActiveSupport::TestCase
 
   test "performing a search" do
     s = search_terms(:one)
-    curr = s.count
+    curr_count = s.count
+    curr_updated = s.updated_at
     s.perform
-    assert_equal curr + 1, s.count
+    assert_equal curr_count + 1, s.count
+    assert_not_equal curr_updated, s.updated_at
   end
 end

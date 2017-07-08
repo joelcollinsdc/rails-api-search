@@ -4,8 +4,11 @@ class SearchTerm < ApplicationRecord
   
   has_many :histories, class_name: "SearchTermHistory"
 
+  scope :recent, -> { order('updated_at desc') }
+  
   #perform a search, counter increments automatically with couter cache
   def perform
     self.histories << SearchTermHistory.create(date: DateTime.now)
+    self.touch #updated_at does not update automatically?
   end
 end
