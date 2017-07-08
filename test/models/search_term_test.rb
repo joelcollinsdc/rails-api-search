@@ -24,4 +24,11 @@ class SearchTermTest < ActiveSupport::TestCase
     s.histories.create(date: "2017-07-08 13:03:23")
     assert_equal curr + 1, s.count
   end
+
+  test "performing a search" do
+    s = search_terms(:one)
+    curr = s.count
+    s.perform
+    assert_equal curr + 1, s.count
+  end
 end

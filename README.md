@@ -14,3 +14,4 @@
 # Assumptions
 
 * On recent searches sidebar, "date" refers to initial creation date of search term (first time a search was run)
+* Only successful API searches should be recorded

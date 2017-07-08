@@ -12,4 +12,6 @@ class HNAlgoliaAPITest < ActiveSupport::TestCase
       assert_equal results['nbHits'], 289126
     end
   end
+
+  #TODO how to test connection errors?
 end
