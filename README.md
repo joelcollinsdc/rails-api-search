@@ -1,8 +1,16 @@
-Going to rewrite the requirements so in case I misinterpreted something at least I'll have it documented...
+# Sample Rails API Search
 
-Use Cases:
+## Search form & listing page
 
-Should be able to browse to a form for a keyword search of an API
-Form contains sidebar of recent searches, alongside with a count of the number of times the particular search has been run. 
+* Form for performing a keywords search of an API
+* View recent searches and count for each term in a sidebar
+* Sort recent searches sidebar by keyword, count, and date
 
-On a search page, the results of the API search is displayed alongside with a history of when this particular search was run
+## Search results page
+
+* Displays results of keyword search
+* Shows history of when search was executed
+
+# Assumptions
+
+* On recent searches sidebar, "date" refers to initial creation date of search term (first time a search was run)
