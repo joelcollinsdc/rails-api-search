@@ -10,7 +10,9 @@ class SearchController < ApplicationController
 
     # more complicated validation would necessitate making a model for the form
     if @term.length < 3
-      return redirect_to({ action: 'index' }, flash: { :error => 'Please enter at least 3 characters...' })
+      return redirect_to({ action: 'index' }, flash: { :error => 'Please enter at least 3 characters.' })
+    elsif @term.length > 255
+      return redirect_to({ action: 'index' }, flash: { :error => 'Search is too long, please try a shorter one.' })
     end
 
     search_term = SearchTerm.find_by_term(@term)

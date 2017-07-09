@@ -1,4 +1,4 @@
 <%= form_tag "search", method: "get", class: "form form-inline" do |f| %>
-  <input type="text" name="q" value="" pattern=".{3,}" placeholder="Enter your query" class='form-control' required title="Minimum length 3 characters" >
+  <input type="text" name="q" value="" pattern=".{3,255}" placeholder="Enter your query" class='form-control' required title="Please enter between 3 and 255 characters" >
   <%= submit_tag "Search", class: 'btn btn-primary' %>
 <% end %>
