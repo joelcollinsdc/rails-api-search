@@ -1,6 +1,6 @@
 <%= render "form", locals: { term: @term } %>
 
-<h2>Responses for <%= @term %></h2>
+<h2>API Responses for <em><%= @term %></em></h2>
 
 <% if @hits.count > 0 %>
   <% @hits.each do |hit| %>
@@ -11,11 +11,11 @@
 <% end %>
 
 <% content_for :sidebar do %>
-  <h2>Past Searches for <%= @term %></h2>
+  <h2>Past Searches for <em><%= @term %></em></h2>
   <% if @term_history %>
     <ul>
       <% @term_history.each do |s| %>
-        <li><%= time_ago_in_words s.date %> ago</li>
+        <li><%= time_ago_in_words s.created_at %> ago</li>
       <% end %>
     </ul>
   <% else %>

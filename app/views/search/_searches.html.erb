@@ -1,14 +1,14 @@
-<h2>Recent Searches</h2>
-<table>
+<h2>Past Searches</h2>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Search</th>
-      <th>Total</th>
-      <th>Last Searched</th>
+      <th><%= sortable "term", "Search" %></th>
+      <th><%= sortable "count", "Total" %></th>
+      <th><%= sortable "updated_at", "Last Searched" %></th>
     </tr>
   </thead>
   <tbody>
-  <% recent_searches.each do |search_term| %>
+  <% searches.each do |search_term| %>
     <tr>
       <td><%= link_to search_term.term, search_path(q: search_term.term) %></td>
       <td><%= search_term.count %></td>

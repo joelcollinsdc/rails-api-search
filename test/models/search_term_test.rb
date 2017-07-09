@@ -18,7 +18,7 @@ class SearchTermTest < ActiveSupport::TestCase
     assert s.valid?
   end
 
-  test "counter cache works" do
+  test "counter cache" do
     s = search_terms(:one)
     curr = s.count
     s.histories.create

@@ -1,30 +1,28 @@
 class SearchController < ApplicationController
-  #before_action :set_search_term, only: [:search]
+  helper_method :sort_column, :sort_direction
 
-  # GET /search_terms
-  # GET /search_terms.json
   def index
-    @recent_searches = SearchTerm.recent
+    @searches = SearchTerm.order(sort_column + " " + sort_direction)
   end
 
-  # POST /search_terms
-  # POST /search_terms.json
   def search
-    @term = params[:q] #sanitize further w/regex??
+    @term = params[:q] #further sanitization necessary?
 
-    #puts term
-    @search_term = SearchTerm.find_by_term(@term)
-    if @search_term
-      @term_history = @search_term.histories
+    search_term = SearchTerm.find_by_term(@term)
+    if search_term
+      @term_history = search_term.histories
     end
     
-    searcher = APISearcher.new
-    response = searcher.search(@term)
+    response = (APISearcher.new).search(@term)
     @hits = response['hits']
   end
 
   private
-    def search_params
-      params.permit(:q)
-    end
+  def sort_column
+    %w[term count updated_at].include?(params[:sort]) ? params[:sort] : "term"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 end

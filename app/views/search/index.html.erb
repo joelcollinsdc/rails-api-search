@@ -3,6 +3,4 @@
 
 <%= render "form" %>
 
-<% content_for :sidebar do %>
-  <%= render "recent", recent_searches: @recent_searches %>
-<% end %>
+<%= render "searches", searches: @searches %>

@@ -9,8 +9,10 @@ class APISearcherTest < ActiveSupport::TestCase
     VCR.use_cassette("basic_test") do
       assert_nil SearchTerm.find_by_term("test")
       results = @searcher.search("test")
-      assert_not_nil SearchTerm.find_by_term("test")
-      assert_equal 1, SearchTerm.find_by_term("test").count
+      term = SearchTerm.find_by_term("test")
+      assert_not_nil term
+      assert_equal 1, term.count
+      assert_equal 1, term.histories.count
     end
   end
 end
