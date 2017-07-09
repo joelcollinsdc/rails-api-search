@@ -1,12 +1,7 @@
 
-
-<h1>HN Api Search Example</h1>
 <p id="notice"><%= notice %></p>
 
-<%= form_tag "search", method: "get" do |f| %>
-  <%= text_field_tag :q, nil, placeholder: "Enter your query" %>
-  <%= submit_tag "Search" %>
-<% end %>
+<%= render "form" %>
 
 <% content_for :sidebar do %>
   <%= render "recent", recent_searches: @recent_searches %>

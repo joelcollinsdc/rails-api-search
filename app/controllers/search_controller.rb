@@ -10,7 +10,7 @@ class SearchController < ApplicationController
   # POST /search_terms
   # POST /search_terms.json
   def search
-    @term = params[:q] #sanitize??
+    @term = params[:q] #sanitize further w/regex??
 
     #puts term
     @search_term = SearchTerm.find_by_term(@term)

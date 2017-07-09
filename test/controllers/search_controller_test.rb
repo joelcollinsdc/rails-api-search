@@ -6,13 +6,15 @@ class SearchControllerTest < ActionDispatch::IntegrationTest
   # end
 
   test "should get index" do
-    get search_url
+    get '/'
     assert_response :success
   end
 
   test "should get search" do
-    get search_search_url
-    assert_response :success
+    VCR.use_cassette("basic_test") do
+      get '/search?q=test'
+      assert_response :success
+    end
   end
 
   # test "should perform search" do
