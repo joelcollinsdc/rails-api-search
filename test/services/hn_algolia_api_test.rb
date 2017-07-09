@@ -9,7 +9,15 @@ class HNAlgoliaAPITest < ActiveSupport::TestCase
     VCR.use_cassette("basic_test") do
       results = @api.search("test")
       assert results.success?
-      assert_equal results['nbHits'], 289126
+      assert_equal 0, results['page']
+    end
+  end
+
+  test "api returns paged results" do
+    VCR.use_cassette("basic_test_paged") do
+      results = @api.search("test", 2)
+      assert results.success?
+      assert_equal 2, results['page']
     end
   end
 
