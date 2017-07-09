@@ -7,6 +7,7 @@ class SearchController < ApplicationController
 
   def search
     @term = params[:q] # further sanitization necessary?
+    @page = params[:page].to_i ||= 0
 
     # more complicated validation would necessitate making a model for the form
     if @term.length < 3
@@ -19,10 +20,10 @@ class SearchController < ApplicationController
 
     @term_history = search_term.histories if search_term
 
-
     begin
-      response = APISearcher.new.search(@term)
-      @hits = response['hits']
+      @response = APISearcher.new.search(@term, @page)
+      @next_page = @page + 1 if @response['nbPages'] > @page
+      @prev_page = @page - 1 if @page > 0
     rescue StandardError => e
       return redirect_to({ action: 'index' }, flash: { :error => "ERROR: #{e.message}" })
     end

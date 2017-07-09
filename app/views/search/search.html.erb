@@ -2,13 +2,23 @@
 
 <h2>API Responses for <em><%= @term %></em></h2>
 
-<% if @hits.count > 0 %>
-  <% @hits.each do |hit| %>
+<% if @response['hits'].count > 0 %>
+  <% @response['hits'].each do |hit| %>
     <p><%= link_to hit["title"], hit["url"] %></p>
   <% end %>
 <% else %>
   <p>No results...</p>
 <% end %>
+
+<p>
+  <% if @prev_page %>
+    <%= link_to raw('&laquo; Previous'), search_path(q: @term, page: @prev_page) %>
+  <% end %>
+  <span>Page <%= @page %> of <%= @response['nbPages'] %></span>
+  <% if @next_page %>
+    <%= link_to raw('Next &raquo;'), search_path(q: @term, page: @next_page) %>
+  <% end %>
+</p>
 
 <% content_for :sidebar do %>
   <h2>Past Searches for <em><%= @term %></em></h2>
