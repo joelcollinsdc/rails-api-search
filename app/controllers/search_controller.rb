@@ -6,23 +6,23 @@ class SearchController < ApplicationController
   end
 
   def search
-    @term = params[:q] #further sanitization necessary?
+    @term = params[:q] # further sanitization necessary?
 
-    #more complicated validation would necessitate making a model for the form...
+    # more complicated validation would necessitate making a model for the form
     if @term.length < 3
-      return redirect_to({ action: "index"}, flash: { :error => "Please enter at least 3 characters..." })
+      return redirect_to({ action: 'index' }, flash: { :error => 'Please enter at least 3 characters...' })
     end
 
     search_term = SearchTerm.find_by_term(@term)
-    if search_term
-      @term_history = search_term.histories
-    end
-    
+
+    @term_history = search_term.histories if search_term
+
+
     begin
-      response = (APISearcher.new).search(@term)
+      response = APISearcher.new.search(@term)
       @hits = response['hits']
     rescue StandardError => e
-      return redirect_to({ action: "index"}, flash: { :error => "ERROR: #{e.message}" })
+      return redirect_to({ action: 'index' }, flash: { :error => "ERROR: #{e.message}" })
     end
 
   end
@@ -31,7 +31,7 @@ class SearchController < ApplicationController
   def sort_column
     %w[term count updated_at].include?(params[:sort]) ? params[:sort] : "updated_at"
   end
-  
+
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
