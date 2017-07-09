@@ -8,6 +8,11 @@ class SearchController < ApplicationController
   def search
     @term = params[:q] #further sanitization necessary?
 
+    #more complicated validation would necessitate making a model for the form...
+    if @term.length < 3
+      return redirect_to({ action: "index"}, flash: { :error => "Please enter at least 3 characters..." })
+    end
+
     search_term = SearchTerm.find_by_term(@term)
     if search_term
       @term_history = search_term.histories
@@ -19,7 +24,7 @@ class SearchController < ApplicationController
 
   private
   def sort_column
-    %w[term count updated_at].include?(params[:sort]) ? params[:sort] : "term"
+    %w[term count updated_at].include?(params[:sort]) ? params[:sort] : "updated_at"
   end
   
   def sort_direction

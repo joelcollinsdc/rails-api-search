@@ -19,7 +19,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">HN Api Search</a>
+          <a class="navbar-brand" href="/">HN API Search</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -32,6 +32,9 @@
       <div class="row">
         <div class="col-md-8">
           <h1>HN API Search Example</h1>
+
+          <%= render "layouts/partials/flash_messages" %>
+
           <%= yield %>
         </div>
         <div class="col-md-4">

@@ -6,4 +6,14 @@ module ApplicationHelper
     direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
+
+  def flash_class(level)
+    levels = {
+      notice: 'alert alert-info',
+      success: 'alert alert-success',
+      error: 'alert alert-danger',
+      alert: 'alert alert-danger'
+    }
+    return levels[level.to_sym]
+  end
 end
