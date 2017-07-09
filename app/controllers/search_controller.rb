@@ -24,7 +24,8 @@ class SearchController < ApplicationController
       @response = APISearcher.new.search(@term, @page)
       @next_page = @page + 1 if @response['nbPages'] > @page
       @prev_page = @page - 1 if @page > 0
-    rescue StandardError => e
+    rescue SocketError, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
+       Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
       return redirect_to({ action: 'index' }, flash: { :error => "ERROR: #{e.message}" })
     end
 
