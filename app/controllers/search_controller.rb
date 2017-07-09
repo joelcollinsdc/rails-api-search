@@ -21,8 +21,8 @@ class SearchController < ApplicationController
     begin
       response = (APISearcher.new).search(@term)
       @hits = response['hits']
-    rescue Exception => e
-      return redirect_to({ action: "index"}, flash: { :error => e.message })
+    rescue StandardError => e
+      return redirect_to({ action: "index"}, flash: { :error => "ERROR: #{e.message}" })
     end
 
   end

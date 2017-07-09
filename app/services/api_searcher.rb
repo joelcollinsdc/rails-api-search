@@ -1,5 +1,5 @@
 class APISearcher
-  # perform an API search and save & save it
+  # perform an API search and save it
   def search(term)
     api = HNAlgoliaAPI.new
     request = api.search(term)
