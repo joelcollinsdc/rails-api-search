@@ -8,7 +8,7 @@ class SearchTerm < ApplicationRecord
   
   #perform a search, counter increments automatically with couter cache
   def perform
-    self.histories << SearchTermHistory.create(date: DateTime.now)
+    self.histories << SearchTermHistory.create
     self.touch #updated_at does not update automatically?
   end
 end

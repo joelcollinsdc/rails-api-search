@@ -21,7 +21,7 @@ class SearchTermTest < ActiveSupport::TestCase
   test "counter cache works" do
     s = search_terms(:one)
     curr = s.count
-    s.histories.create(date: "2017-07-08 13:03:23")
+    s.histories.create
     assert_equal curr + 1, s.count
   end
 
