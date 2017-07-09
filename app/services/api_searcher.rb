@@ -8,7 +8,7 @@ class APISearcher
       st.perform
       return request.parsed_response
     else
-      return nil #TODO
+      raise 'An exception occurred querying the API'
     end
   end
 end

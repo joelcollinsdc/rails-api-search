@@ -18,8 +18,13 @@ class SearchController < ApplicationController
       @term_history = search_term.histories
     end
     
-    response = (APISearcher.new).search(@term)
-    @hits = response['hits']
+    begin
+      response = (APISearcher.new).search(@term)
+      @hits = response['hits']
+    rescue Exception => e
+      return redirect_to({ action: "index"}, flash: { :error => e.message })
+    end
+
   end
 
   private
