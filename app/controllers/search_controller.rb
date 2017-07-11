@@ -2,7 +2,7 @@ class SearchController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @searches = SearchTerm.order(sort_column + " " + sort_direction)
+    @searches = SearchTerm.order(sort_column + " " + sort_direction).page params[:page]
   end
 
   def search

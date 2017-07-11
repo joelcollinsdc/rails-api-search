@@ -24,4 +24,16 @@ class SearchControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     assert_equal 'Search is too long, please try a shorter one.', flash[:error]
   end
+
+  test 'paging' do
+    get '/'
+    assert_select "nav.pagination span.page", {count: 0}
+
+    25.times do |t|
+      SearchTerm.create(term: "term_#{t}")
+    end
+    
+    get '/'
+    assert_select "nav.pagination span.page", {count: 2}
+  end
 end

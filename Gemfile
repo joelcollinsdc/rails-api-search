@@ -61,6 +61,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'httparty'
+gem 'kaminari'
 
 group :test do
   gem 'webmock'
